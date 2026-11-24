@@ -1,0 +1,6 @@
+var.sh
+var.ps1
+*.tfvars
+*.tfstate
+*.tfstate.*
+.terraform/
