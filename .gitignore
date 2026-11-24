@@ -1,6 +1,37 @@
-var.sh
-var.ps1
-*.tfvars
+# Local provider plugins and modules (recreated by `terraform init`)
+.terraform/
+
+# State files: contain resource details and often secrets in plain text
 *.tfstate
 *.tfstate.*
-.terraform/
+
+# Saved plan files (`terraform plan -out=...`), which can contain secrets
+*.tfplan
+tfplan
+
+# Variable files with real values (commit an example.tfvars instead if needed)
+*.tfvars
+*.tfvars.json
+
+# Local override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Terraform CLI config (may contain API tokens)
+.terraformrc
+terraform.rc
+
+# Credentials and personal notes
+var.sh
+var.ps1
+.env
+
+# Backups and editor files
+*.bak
+.vscode/
