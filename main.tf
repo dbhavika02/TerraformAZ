@@ -7,7 +7,7 @@ terraform {
   }
   backend "azurerm" {
     resource_group_name  = "tfstate-rg"
-    storage_account_name = "tfstatesta3539"
+    storage_account_name = "tfstatesta29068"
     container_name       = "tfstate"
     key                  = "dev.terraform.tfstate"
   }
@@ -28,19 +28,38 @@ variable "location" {
   default = "North Europe"
 }
 
-# resource "azurerm_resource_group" "tech-rg" {
-#   name     = "tech-rg"
-#   location = var.location
-# }
+variable "environment" {
+  type        = string
+  description = "The env type"
+  default     = "staging"
+}
 
-# resource "azurerm_storage_account" "tech-sta" {
-#   name                     = "techsta20261123" # must be globally unique: 3-24 lowercase letters/digits
-#   resource_group_name      = azurerm_resource_group.tech-rg.name
-#   location                 = azurerm_resource_group.tech-rg.location #implicit dependencies
-#   account_tier             = "Standard"
-#   account_replication_type = "LRS"
+locals {
+  common_tags = {
+    environment = "dev"
+    lob         = "banking"
+    stage       = "alpha"
+  }
+}
 
-#   tags = {
-#     environment = "staging"
-#   }
-# } 
+resource "azurerm_resource_group" "tech-rg" {
+  name     = "tech-rg"
+  location = var.location
+}
+
+resource "azurerm_storage_account" "tech-sta" {
+  name                     = "techsta20261123" # must be globally unique: 3-24 lowercase letters/digits
+  resource_group_name      = azurerm_resource_group.tech-rg.name
+  location                 = azurerm_resource_group.tech-rg.location #implicit dependencies
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  tags = {
+    environment = local.common_tags.stage
+  }
+}
+
+
+output "storage_account_name" {
+  value = azurerm_storage_account.tech-sta.name
+}
