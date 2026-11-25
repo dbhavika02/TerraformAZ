@@ -74,7 +74,7 @@ variable "vm_config" {
 
 
 variable "storage_account_name" {
-  type        = list(string)
+  type        = set(string)
   description = "Name of storage acc"
   default     = ["tfvmexstacc1", "tfvmexstacc2"]
 }
