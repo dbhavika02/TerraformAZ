@@ -1,13 +1,18 @@
+variable "name" {
+  default = "tfvmex"
+}
+
+
 variable "location" {
   type    = string
   default = "North Europe"
 }
 
-# variable "environment" {
-#   type        = string
-#   description = "The env type"
-#   default     = "staging"
-# }
+variable "environment" {
+  type        = string
+  description = "The env type"
+  default     = "staging"
+}
 
 variable "storage_disk" {
   type        = number
@@ -65,4 +70,11 @@ variable "vm_config" {
     sku       = "22_04-lts"
     version   = "latest"
   }
+}
+
+
+variable "storage_account_name" {
+  type        = list(string)
+  description = "Name of storage acc"
+  default     = ["tfvmexstacc1", "tfvmexstacc2"]
 }
