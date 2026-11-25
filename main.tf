@@ -5,10 +5,19 @@ terraform {
       version = "~>4.8.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = "tfstate-rg"
+    storage_account_name = "tfstatesta3539"
+    container_name       = "tfstate"
+    key                  = "dev.terraform.tfstate"
+  }
+  required_version = ">=1.9.0"
 }
 
+
+
 provider "azurerm" {
-  subscription_id = "a4a09634-099d-4f64-9420-f0c1f7c2d81e"
+  subscription_id = "a605e0b0-3112-4baf-8a25-ca8833f74433" # Bhavika-Sub
   features {
 
   }
@@ -34,4 +43,4 @@ variable "location" {
 #   tags = {
 #     environment = "staging"
 #   }
-# }
+# } 
